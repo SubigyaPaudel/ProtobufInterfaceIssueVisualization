@@ -1,0 +1,14 @@
+[project]
+name = "thesisexample"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "protobuf>=6.33.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.1",
+]

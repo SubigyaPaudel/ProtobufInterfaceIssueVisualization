@@ -1,0 +1,42 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.14.0, pytest-9.0.1, pluggy-1.6.0 -- /Users/subigyapaudel/Desktop/codes/ThesisExample/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/subigyapaudel/Desktop/codes/ThesisExample
+configfile: pyproject.toml
+collecting ... collected 2 items
+
+test_service_config.py::test_case_using_v1 Received binary message = 0a0a436f6d706f6e656e743218b817
+Configuration message accepted
+PASSED
+test_service_config.py::test_case_using_v2 Received binary message = 0a0a436f6d706f6e656e743218b817
+FAILED
+
+=================================== FAILURES ===================================
+______________________________ test_case_using_v2 ______________________________
+
+    def test_case_using_v2():
+        # simulate component 3 filling a message to send
+        message = v2_pb2.ServiceConfig()
+        filled_message = fill_message(message)
+>       component2(filled_message)
+
+test_service_config.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+message = service_name: "Component2"
+request_timeout_ms: 3000
+
+
+    def component2(message):
+        print(f"Received binary message = {message.SerializeToString().hex()}")
+>       assert (
+            message.max_worker_threads < 6
+        ), f"Max worker threads cannot be greater than 6"
+E       AssertionError: Max worker threads cannot be greater than 6
+E       assert 8 < 6
+E        +  where 8 = service_name: "Component2"\nrequest_timeout_ms: 3000\n.max_worker_threads
+
+test_service_config.py:7: AssertionError
+=========================== short test summary info ============================
+FAILED test_service_config.py::test_case_using_v2 - AssertionError: Max worke...
+========================= 1 failed, 1 passed in 0.04s ==========================

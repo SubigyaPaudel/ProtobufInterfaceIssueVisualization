@@ -1,0 +1,13 @@
+syntax = "proto2";
+package interfaces.v1;
+
+message ServiceConfig {
+  // Logical name of the service.
+  required string service_name = 1;
+  // Maximum number of concurrent worker threads the service is allowed to spawn.
+  // Defaults to 8 if the field is not explicitly set.
+  optional int32 max_worker_threads = 2 [default = 4];
+  // Timeout (in milliseconds) for processing a single request.
+  // Defaults to 5 seconds.
+  optional int32 request_timeout_ms = 3 [default = 5000];
+}
